@@ -1,4 +1,4 @@
-import { useState } from 'react'; // Import React
+import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,11 @@ const Register = () => {
     e.preventDefault();
     const { name, email, password } = data;
     try {
-      const { data } = await axios.post('/register', { name, email, password });
+      const { data } = await axios.post('/api/register', {
+        name,
+        email,
+        password,
+      });
       if (data.error) {
         toast.error(data.error);
       } else {
@@ -25,7 +29,7 @@ const Register = () => {
           password: '',
         });
         toast.success('Logged Successfully, Welcome to Register');
-        navigate('/');
+        navigate('/login');
       }
     } catch (err) {
       console.error(err);
